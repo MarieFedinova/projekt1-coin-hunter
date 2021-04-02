@@ -24,10 +24,10 @@ body {
 
 #score {
 	position: absolute;
-	top: 50px;
-	left: 50px;
+	top: 30px;
+	left: 30px;
 	font-family: 'Press Start 2P', sans-serif;
-	font-size: 36px;
+	font-size: 28px;
 	z-index: 999;
 	color: var(--score);
 }

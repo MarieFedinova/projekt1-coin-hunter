@@ -1,17 +1,10 @@
-// toto budeš potřebovat později
-/*
-if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
-	// panacek a mince se prekryvaji
-}
-*/
 
 let panacek, panacekX, panacekY, panacekSirka, panacekVyska;
 let mince, minceX, minceY, minceSirka, minceVyska;
+let count = 0;
 
-
-
+// pohyb panáčka do 4 směrů
 function move(event) {
-	let position = panacek.getBoundingClientRect();
 	let key = event.keyCode;
 	let maxWidth = window.innerWidth;
 	let maxHeight = window.innerHeight;
@@ -31,9 +24,8 @@ function move(event) {
 		panacekX = panacekX + 15;
     panacek.src = 'obrazky/panacek-vpravo.png'
     }
-  
 	umistiPanacka();
-  testCollision();  
+  testCollision(); 
 }
 
 function onPageLoad() {
@@ -57,7 +49,7 @@ function onPageLoad() {
 
 	// a vygenerujeme první minci na náhodné pozici
   newCoin();
-
+  
 }
 
 // funkce, která umístí panáčka na jeho souřadnice
@@ -76,9 +68,24 @@ function newCoin() {
   mince.style.top = minceY + 'px';
 }
 
-// fuknce pro otestování kolize panáčka s mincí
+// funkce pro otestování kolize panáčka s mincí
 function testCollision() {
 	if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
     newCoin();
+    play('zvukmince');
+    count = count + 1;
+    document.querySelector('#score').textContent = count;
+    if (count === 5) {
+      play('zvukfanfara');
+      setTimeout(function() { 
+        alert('Jupí, 5 mincí máš v kapse!!'); 
+      }, 50);
+    }
   }
+}
+
+// funkce k přehrání audia
+function play(element) {
+  audio = document.getElementById(element);
+  audio.play();
 }
