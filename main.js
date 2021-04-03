@@ -25,7 +25,8 @@ function move(event) {
     panacek.src = 'obrazky/panacek-vpravo.png'
     }
 	umistiPanacka();
-  testCollision(); 
+  testCollision();
+  play('hudba'); 
 }
 
 function onPageLoad() {
